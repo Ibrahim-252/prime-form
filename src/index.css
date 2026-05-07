@@ -1,0 +1,112 @@
+/* ── Tailwind base layers ── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom variables ── */
+:root {
+  --primary:    #050505; /* Deep Obsidian */
+  --accent:     #ff6b35;
+  --secondary:  #004e89;
+  --surface:    #0a0a0a;
+  --muted:      #666666;
+  --light:      #f5f2ee;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+
+/* ── Custom utilities ── */
+@layer utilities {
+  /* Text stroke utility */
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+    color: transparent;
+  }
+
+  /* Grain overlay using pseudo-element */
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    z-index: 9999;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply backdrop-blur-xl bg-white/[0.03] border border-white/[0.08];
+  }
+  
+  .glass-dark {
+    @apply backdrop-blur-2xl bg-black/40 border border-white/[0.05];
+  }
+
+  /* Text glow */
+  .text-glow {
+    text-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
+  }
+
+  /* Section divider line */
+  .section-line {
+    @apply w-12 h-px bg-accent mb-6;
+  }
+
+  /* Smooth underline animation */
+  .hover-underline {
+    position: relative;
+  }
+  .hover-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #ff6b35;
+    transition: width 0.3s ease;
+  }
+  .hover-underline:hover::after {
+    width: 100%;
+  }
+}
+
+/* ── Keyframes ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulse-accent {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(255,107,53,0); }
+}
+
+/* ── Video overlay styles ── */
+.video-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(5,5,5,0.4) 0%,
+    rgba(5,5,5,0.1) 40%,
+    rgba(5,5,5,0.8) 80%,
+    rgba(5,5,5,1) 100%
+  );
+}
+
+/* ── Accordion transition ── */
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+/* ── Scrollbar for admin panel ── */
+.admin-scroll::-webkit-scrollbar { width: 4px; }
+.admin-scroll::-webkit-scrollbar-thumb { background: #ff6b35; border-radius: 2px; }
+
