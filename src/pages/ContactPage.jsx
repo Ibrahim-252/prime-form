@@ -16,9 +16,9 @@ const GOALS = [
 /* Contact info tiles */
 const CONTACT_INFO = [
   { Icon: Mail,    label: 'Email',     value: 'hello@primeform.com',     href: 'mailto:hello@primeform.com' },
-  { Icon: Phone,   label: 'Phone',     value: '+44 20 7123 4567',        href: 'tel:+442071234567'          },
+  { Icon: Phone,   label: 'Phone',     value: '+971 52 593 4143',        href: 'tel:+971525934143'          },
   { Icon: Clock,   label: 'Response',  value: 'Within 24 hours',         href: null                         },
-  { Icon: MapPin,  label: 'Based in',  value: 'London, UK (Global)',     href: null                         },
+  { Icon: MapPin,  label: 'Based in',  value: 'Dubai, UAE (Global)',     href: null                         },
 ]
 
 /* Calendly placeholder embed */
@@ -119,7 +119,7 @@ function ContactForm() {
 
       <div>
         <label className="text-xs text-muted mb-1.5 block">Phone Number</label>
-        <input className={fieldClass} placeholder="+44 7700 000000" value={form.phone} onChange={update('phone')} />
+        <input className={fieldClass} placeholder="+971 52 593 4143" value={form.phone} onChange={update('phone')} />
       </div>
 
       <div>
@@ -205,7 +205,7 @@ export default function ContactPage() {
               {/* WhatsApp button */}
               <AnimatedSection delay={0.2}>
                 <a
-                  href="https://wa.me/442071234567"
+                  href="https://wa.me/971525934143"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-5 rounded-2xl border border-green-500/20

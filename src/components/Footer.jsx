@@ -56,7 +56,7 @@ export default function Footer({ navigate }) {
 
             <div className="mb-6 text-sm text-light/80 space-y-1">
               <p><a href="mailto:hello@primeform.com" className="hover:text-accent transition-colors">hello@primeform.com</a></p>
-              <p><a href="tel:+971500000000" className="hover:text-accent transition-colors">+971 50 000 0000</a></p>
+              <p><a href="tel:+971525934143" className="hover:text-accent transition-colors">+971 52 593 4143</a></p>
             </div>
 
             {/* Social links */}

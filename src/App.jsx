@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 // ── Layout ──
 import Navbar  from './components/Navbar'
 import Footer  from './components/Footer'
+import WhatsAppButton from './components/WhatsAppButton'
 
 // ── Public pages ──
 import HomePage         from './pages/HomePage'
@@ -131,6 +132,7 @@ export default function App() {
       </main>
 
       <Footer navigate={navigate} />
+      <WhatsAppButton />
     </div>
   )
 }
