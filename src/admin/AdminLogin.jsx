@@ -77,9 +77,10 @@ export default function AdminLogin({ onLogin }) {
   }
 
   const inputBase = `
-    w-full bg-white/4 border rounded-xl px-4 py-3 text-sm text-light
+    w-full bg-white/7 border border-white/12 rounded-xl px-4 py-3 text-sm text-light
     placeholder:text-muted outline-none transition-all duration-200
-    focus:bg-white/6
+    hover:bg-white/9 hover:border-white/20
+    focus:border-accent/60 focus:bg-white/12 focus:ring-1 focus:ring-accent/20
   `
 
   return (

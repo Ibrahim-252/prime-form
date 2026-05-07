@@ -24,9 +24,10 @@ function AuthInput({ icon: Icon, type='text', placeholder, value, onChange, righ
       <Icon size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
       <input
         type={type} value={value} onChange={onChange} placeholder={placeholder} required
-        className="w-full bg-white/4 border border-white/10 rounded-xl pl-10 pr-10 py-3
+        className="w-full bg-white/7 border border-white/12 rounded-xl pl-10 pr-10 py-3
                    text-sm text-light placeholder:text-muted outline-none transition-all
-                   focus:border-accent/50 focus:bg-white/6"
+                   hover:bg-white/9 hover:border-white/20
+                   focus:border-accent/60 focus:bg-white/12 focus:ring-1 focus:ring-accent/20"
       />
       {right}
     </div>
