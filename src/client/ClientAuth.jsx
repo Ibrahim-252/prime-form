@@ -21,13 +21,13 @@ function Particle({ x, y, size, delay }) {
 function AuthInput({ icon: Icon, type='text', placeholder, value, onChange, right }) {
   return (
     <div className="relative">
-      <Icon size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none" />
+      <Icon size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70 pointer-events-none" />
       <input
         type={type} value={value} onChange={onChange} placeholder={placeholder} required
-        className="w-full bg-white/7 border border-white/12 rounded-xl pl-10 pr-10 py-3
-                   text-sm text-light placeholder:text-muted outline-none transition-all
-                   hover:bg-white/9 hover:border-white/20
-                   focus:border-accent/60 focus:bg-white/12 focus:ring-1 focus:ring-accent/20"
+        className="w-full bg-black/60 border border-white/10 rounded-xl pl-10 pr-10 py-3.5
+                   text-white placeholder:text-white/20 outline-none transition-all
+                   hover:border-accent/30 hover:bg-black/80
+                   focus:border-accent focus:bg-black/90 focus:ring-1 focus:ring-accent/20"
       />
       {right}
     </div>

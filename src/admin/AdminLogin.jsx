@@ -77,10 +77,10 @@ export default function AdminLogin({ onLogin }) {
   }
 
   const inputBase = `
-    w-full bg-white/7 border border-white/12 rounded-xl px-4 py-3 text-sm text-light
-    placeholder:text-muted outline-none transition-all duration-200
-    hover:bg-white/9 hover:border-white/20
-    focus:border-accent/60 focus:bg-white/12 focus:ring-1 focus:ring-accent/20
+    w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white
+    placeholder:text-white/20 outline-none transition-all duration-200
+    hover:border-accent/30 hover:bg-black/80
+    focus:border-accent focus:bg-black/90 focus:ring-1 focus:ring-accent/20
   `
 
   return (
@@ -183,7 +183,7 @@ export default function AdminLogin({ onLogin }) {
             <div>
               <label className="text-xs text-muted mb-1.5 block font-medium">Email Address</label>
               <div className="relative">
-                <Mail size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
+                <Mail size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
                 <input
                   type="email"
                   required
@@ -199,7 +199,7 @@ export default function AdminLogin({ onLogin }) {
             <div>
               <label className="text-xs text-muted mb-1.5 block font-medium">Password</label>
               <div className="relative">
-                <Lock size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
+                <Lock size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-accent/70" />
                 <input
                   type={showPass ? 'text' : 'password'}
                   required
