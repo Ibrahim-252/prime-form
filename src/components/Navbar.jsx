@@ -36,10 +36,10 @@ export default function Navbar({ currentPage, navigate, clientUser, onClientPort
   return (
     <>
       <header
-        className={`fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-500 rounded-2xl ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled || mobileOpen
-            ? 'glass-dark py-2'
-            : 'bg-transparent py-4'
+            ? 'glass-dark py-3 border-b border-white/5'
+            : 'bg-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">

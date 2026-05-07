@@ -101,20 +101,17 @@ function HeroSection({ navigate }) {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 md:pt-28">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 md:pt-44">
 
-        {/* Eyebrow badge */}
+        {/* Eyebrow lead-in */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-3 glass px-5 py-2 mb-8 rounded-full shadow-2xl shadow-accent/10 border-white/20"
+          className="flex items-center gap-4 mb-5"
         >
-          <div className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-          </div>
-          <span className="text-[10px] sm:text-xs font-bold tracking-[0.25em] text-light uppercase">
+          <div className="w-10 h-px bg-accent/60" />
+          <span className="text-[10px] sm:text-xs font-bold tracking-[0.4em] text-accent uppercase">
             Executive Health Coaching
           </span>
         </motion.div>
