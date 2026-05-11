@@ -54,7 +54,7 @@ export default function AboutPage({ navigate }) {
 
                   {/* Name badge */}
                   <div className="relative z-10 bg-primary/90 backdrop-blur-sm rounded-xl p-4 w-full">
-                    <p className="font-display text-2xl">James Clarke</p>
+                    <p className="font-display text-2xl">Mohamed Nema</p>
                     <p className="text-sm text-muted">Founder & Head Coach</p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ export default function AboutPage({ navigate }) {
 
               <div className="space-y-5 text-light/70 leading-relaxed">
                 <p>
-                  At 38, I was running a high-growth technology company, flying 200+ days a year, and quietly falling apart. 
+                  At 26, I was running a high-growth technology company, flying 200+ days a year, and quietly falling apart. 
                   My energy was crashing by 2pm. My sleep was fragmented. I'd gained 14kg without changing a single habit.
                 </p>
                 <p>
