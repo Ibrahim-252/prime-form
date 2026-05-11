@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle2, Award, BookOpen, Brain } from 'lucide-react'
 import { SectionHeader, AnimatedSection, Button, Badge, StatCard } from '../components/UI'
-import ibrahimomar from '../assets/ibrahimomar.jpg'
+import ibrahimomar from '../assets/vedio/ibrahimomar.jpeg'
 
 const CREDENTIALS = [
   'MSc Exercise Physiology — University of Edinburgh',
