@@ -62,7 +62,6 @@ export async function clientSignup({ name, email, password, goal, phone }) {
 }
 
 export async function clientLogin({ email, password }) {
-  await delay(1000)
   const data = await apiFetch('/auth/client/login', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
