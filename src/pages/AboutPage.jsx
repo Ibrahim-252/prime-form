@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { CheckCircle2, Award, BookOpen, Brain } from 'lucide-react'
 import { SectionHeader, AnimatedSection, Button, Badge, StatCard } from '../components/UI'
+import ibrahimomar from '../assets/ibrahimomar.jpg'
 
 const CREDENTIALS = [
   'MSc Exercise Physiology — University of Edinburgh',
@@ -46,11 +47,11 @@ export default function AboutPage({ navigate }) {
                 <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-secondary/30 to-accent/10
                                 border border-white/5 overflow-hidden flex items-end p-8">
                   {/* Placeholder portrait */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-40 h-40 rounded-full bg-secondary/30 flex items-center justify-center">
-                      <span className="font-display text-6xl text-accent">JC</span>
-                    </div>
-                  </div>
+                  <img
+  src={ibrahimomar}
+  alt="Mohamed Nema"
+  className="absolute inset-0 w-full h-full object-cover"
+/>
 
                   {/* Name badge */}
                   <div className="relative z-10 bg-primary/90 backdrop-blur-sm rounded-xl p-4 w-full">
@@ -111,7 +112,7 @@ export default function AboutPage({ navigate }) {
               </div>
 
               <Button className="mt-8" onClick={() => navigate('contact')}>
-                Work With James
+                Work With Mohamed
               </Button>
             </AnimatedSection>
           </div>
@@ -165,7 +166,7 @@ export default function AboutPage({ navigate }) {
             <blockquote className="font-display text-4xl md:text-6xl leading-tight">
               "TO PROVE THAT THE DEMANDS OF ELITE PERFORMANCE AND ELITE HEALTH ARE NOT IN CONFLICT — THEY ARE THE SAME THING."
             </blockquote>
-            <p className="mt-8 text-muted">— James Clarke, Founder</p>
+            <p className="mt-8 text-muted">— Mohamed Nema, Founder</p>
           </AnimatedSection>
         </div>
       </section>
