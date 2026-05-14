@@ -3,18 +3,17 @@
  *  PRIME FORM — API LAYER
  *  ─────────────────────────────────────────────────────────
  *  ALL backend calls live here.
- *  Your backend friend only needs to:
- *    1. Set BASE to the real API URL
- *    2. Uncomment the apiFetch lines
- *    3. Comment out the // ── MOCK ── blocks
+ *
+ *  BASE URL is set via VITE_API_BASE in .env.local
+ *  (falls back to localhost:3000 for local dev without ngrok)
  *
  *  Token storage: localStorage  →  'pf_token' + 'pf_user'
  *  Every protected request auto-sends: Authorization: Bearer <token>
  * ============================================================
  */
 
-// ① Change this to real API URL when backend is ready
-const BASE = 'http://localhost:3000/api'
+// Pulled from .env.local — restart `npm run dev` after editing
+const BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000/api'
 
 const delay = (ms = 800) => new Promise(r => setTimeout(r, ms))
 
@@ -31,6 +30,7 @@ async function apiFetch(path, options = {}) {
     ...options,
     headers: {
       'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': 'true',
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },
