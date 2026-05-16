@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { MessageCircle, Phone, Mail, MapPin, CheckCircle2, Clock } from 'lucide-react'
 import { SectionHeader, AnimatedSection, Button, Badge } from '../components/UI'
@@ -21,48 +21,44 @@ const CONTACT_INFO = [
   { Icon: MapPin,  label: 'Based in',  value: 'Dubai, UAE (Global)',     href: null                         },
 ]
 
-/* Calendly placeholder embed */
-function CalendlyPlaceholder() {
+
+function CalendlyEmbed() {
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    if (!containerRef.current) return
+    const initWidget = () => {
+      if (window.Calendly) {
+        window.Calendly.initInlineWidget({
+          url: 'https://calendly.com/ibo-haji44/new-meeting?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1',
+          parentElement: containerRef.current,
+        })
+      } else {
+        setTimeout(initWidget, 100)
+      }
+    }
+    initWidget()
+  }, [])
+
   return (
     <div className="rounded-2xl border border-white/8 bg-surface/50 overflow-hidden">
-      <div className="p-6 border-b border-white/5">
+      <div className="p-6 pb-4">
         <p className="text-xs font-semibold text-accent uppercase tracking-widest">Book Your Call</p>
         <h3 className="font-display text-3xl mt-1">Schedule a Discovery Call</h3>
+        <p className="text-sm text-muted mt-2">Pick a time that works for you — confirmation sent instantly.</p>
       </div>
-      {/* Calendly embed placeholder */}
-      <div className="h-[480px] flex flex-col items-center justify-center gap-5 bg-white/1">
-        <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center">
-          <Clock size={28} className="text-accent" />
+      <div className="px-3 pb-3">
+        <div className="rounded-xl overflow-hidden ring-1 ring-accent/15">
+          <div
+            ref={containerRef}
+            className="h-[640px] bg-white"
+            style={{ minWidth: '300px' }}
+          />
         </div>
-        <div className="text-center">
-          <p className="font-semibold text-light mb-2">Calendly Integration</p>
-          <p className="text-sm text-muted max-w-xs">
-            Your booking calendar will appear here. Replace this placeholder with your Calendly embed code.
-          </p>
-        </div>
-        {/* Placeholder CTA mimics Calendly */}
-        <div className="grid grid-cols-2 gap-3 w-full max-w-xs px-4">
-          {['Mon', 'Tue', 'Wed', 'Thu'].map((day) => (
-            <div key={day} className="p-3 rounded-xl border border-white/8 text-center cursor-pointer hover:border-accent/30 transition-colors">
-              <p className="text-xs text-muted">{day}</p>
-              <p className="text-sm font-semibold mt-1">9:00 AM</p>
-            </div>
-          ))}
-        </div>
-        <a
-          href="https://calendly.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-accent text-white text-sm font-semibold px-6 py-2.5 rounded-full
-                     hover:bg-orange-500 transition-colors"
-        >
-          Connect Calendly
-        </a>
       </div>
     </div>
   )
 }
-
 /* Contact form */
 function ContactForm() {
   const [form,    setForm]    = useState({ name: '', email: '', phone: '', goal: '', message: '' })
@@ -124,7 +120,7 @@ function ContactForm() {
 
       <div>
         <label className="text-xs text-muted mb-1.5 block">Primary Goal *</label>
-        <select required className={fieldClass} value={form.goal} onChange={update('goal')}>
+       <select required className={fieldClass} value={form.goal} onChange={update('goal')} style={{ colorScheme: 'dark' }}>
           <option value="" disabled>Select your main goal</option>
           {GOALS.map((g) => <option key={g} value={g}>{g}</option>)}
         </select>
@@ -180,7 +176,7 @@ export default function ContactPage() {
             {/* Left: Calendly + contact info */}
             <div className="space-y-8">
               <AnimatedSection>
-                <CalendlyPlaceholder />
+                <CalendlyEmbed />
               </AnimatedSection>
 
               {/* Contact info */}

@@ -2,16 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Eye, EyeOff, Lock, Mail, AlertCircle, CheckCircle2, Loader2, Shield } from 'lucide-react'
 import primeLogo from '../../logo/primelogo.jpeg'
-
-/* ─────────────────────────────────────────────
-   CREDENTIALS (demo — shown on the UI)
-   In production, replace with real auth API.
-───────────────────────────────────────────── */
-const DEMO_CREDENTIALS = [
-  { email: 'admin@primeform.com',  password: 'Admin@2025',  role: 'Super Admin', name: 'James Clarke'   },
-  { email: 'coach@primeform.com',  password: 'Coach@2025',  role: 'Coach',       name: 'Sarah Mitchell' },
-  { email: 'viewer@primeform.com', password: 'View@2025',   role: 'Viewer',      name: 'Alex Turner'    },
-]
+import { adminLogin } from '../lib/api'
 
 /* ─────────────────────────────────────────────
    FLOATING PARTICLE (decorative background)
@@ -35,45 +26,31 @@ function Particle({ x, y, size, delay }) {
    LOGIN FORM
 ───────────────────────────────────────────── */
 export default function AdminLogin({ onLogin }) {
-  const [email,       setEmail]       = useState('')
-  const [password,    setPassword]    = useState('')
-  const [showPass,    setShowPass]    = useState(false)
-  const [remember,    setRemember]    = useState(false)
-  const [loading,     setLoading]     = useState(false)
-  const [error,       setError]       = useState('')
-  const [success,     setSuccess]     = useState(false)
-  const [showCreds,   setShowCreds]   = useState(false)
+  const [email,    setEmail]    = useState('')
+  const [password, setPassword] = useState('')
+  const [showPass, setShowPass] = useState(false)
+  const [remember, setRemember] = useState(false)
+  const [loading,  setLoading]  = useState(false)
+  const [error,    setError]    = useState('')
+  const [success,  setSuccess]  = useState(false)
 
-  /* Simulate async auth */
+  /* Authenticate against real backend */
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setLoading(true)
 
-    await new Promise((r) => setTimeout(r, 1200))
-
-    // Find matching credential
-    const match = DEMO_CREDENTIALS.find(
-      (c) => c.email === email.trim() && c.password === password
-    )
-
-    setLoading(false)
-
-    if (match) {
+    try {
+      const data = await adminLogin({ email: email.trim(), password })
+      setLoading(false)
       setSuccess(true)
-      // Short success animation, then enter admin
+      // Short success animation, then enter admin panel
       await new Promise((r) => setTimeout(r, 900))
-      onLogin({ name: match.name, role: match.role, email: match.email })
-    } else {
-      setError('Invalid email or password. Check the demo credentials below.')
+      onLogin({ name: data.name, role: data.role, email: data.email })
+    } catch (err) {
+      setLoading(false)
+      setError(err.message || 'Invalid email or password.')
     }
-  }
-
-  /* Autofill from demo credential click */
-  const autofill = (cred) => {
-    setEmail(cred.email)
-    setPassword(cred.password)
-    setError('')
   }
 
   const inputBase = `
@@ -187,6 +164,7 @@ export default function AdminLogin({ onLogin }) {
                 <input
                   type="email"
                   required
+                  autoComplete="email"
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); setError('') }}
                   placeholder="admin@primeform.com"
@@ -203,6 +181,7 @@ export default function AdminLogin({ onLogin }) {
                 <input
                   type={showPass ? 'text' : 'password'}
                   required
+                  autoComplete="current-password"
                   value={password}
                   onChange={(e) => { setPassword(e.target.value); setError('') }}
                   placeholder="••••••••"
@@ -264,62 +243,6 @@ export default function AdminLogin({ onLogin }) {
               )}
             </button>
           </form>
-
-          {/* ── Demo credentials section ── */}
-          <div className="mt-6 border-t border-white/5 pt-5">
-            <button
-              onClick={() => setShowCreds(!showCreds)}
-              className="w-full flex items-center justify-between text-xs text-muted hover:text-light transition-colors group"
-            >
-              <span className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center text-accent font-bold">?</span>
-                Demo credentials for testing
-              </span>
-              <motion.span animate={{ rotate: showCreds ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                ↓
-              </motion.span>
-            </button>
-
-            <AnimatePresence>
-              {showCreds && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="overflow-hidden"
-                >
-                  <div className="pt-4 space-y-2">
-                    {DEMO_CREDENTIALS.map((cred) => (
-                      <button
-                        key={cred.email}
-                        onClick={() => autofill(cred)}
-                        className="w-full text-left p-3 rounded-xl bg-white/3 border border-white/8
-                                   hover:border-accent/30 hover:bg-accent/5 transition-all duration-150 group"
-                      >
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <p className="text-xs font-medium text-light group-hover:text-accent transition-colors">
-                              {cred.name}
-                            </p>
-                            <p className="text-[11px] text-muted mt-0.5">{cred.email}</p>
-                          </div>
-                          <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-muted">
-                            {cred.role}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-muted mt-1.5 font-mono tracking-wide">
-                          Password: {cred.password}
-                        </p>
-                      </button>
-                    ))}
-                    <p className="text-[10px] text-muted/60 text-center pt-1">
-                      Click any credential to autofill the form
-                    </p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
         </div>
 
         {/* ── Back to site link ── */}

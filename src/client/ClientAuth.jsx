@@ -96,9 +96,9 @@ function LoginForm({ onSuccess, switchToSignup }) {
       </button>
 
       {/* Demo hint */}
-      <div className="p-3 rounded-xl bg-white/3 border border-white/8 text-center">
+      {/* <div className="p-3 rounded-xl bg-white/3 border border-white/8 text-center">
         <p className="text-[11px] text-muted">Demo: <span className="text-light font-mono">client@demo.com</span> / <span className="text-light font-mono">Demo@2025</span></p>
-      </div>
+      </div> */}
 
       <p className="text-center text-xs text-muted pt-1">
         New to Prime Form?{' '}
