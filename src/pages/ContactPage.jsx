@@ -76,10 +76,10 @@ function ContactForm() {
     setSuccess(true)
   }
 
-  const fieldClass = `
-    w-full bg-white/3 border border-white/10 rounded-xl px-4 py-3
+ const fieldClass = `
+    w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3
     text-sm text-light placeholder:text-muted outline-none
-    focus:border-accent/50 focus:bg-white/5 transition-all duration-200
+    focus:border-accent/50 focus:bg-black/60 transition-all duration-200
   `
 
   if (success) {
@@ -120,10 +120,13 @@ function ContactForm() {
 
       <div>
         <label className="text-xs text-muted mb-1.5 block">Primary Goal *</label>
-       <select required className={fieldClass} value={form.goal} onChange={update('goal')} style={{ colorScheme: 'dark' }}>
-          <option value="" disabled>Select your main goal</option>
-          {GOALS.map((g) => <option key={g} value={g}>{g}</option>)}
-        </select>
+       <DarkSelect
+          required
+          value={form.goal}
+          onChange={(val) => setForm({ ...form, goal: val })}
+          options={GOALS}
+          placeholder="Select your main goal"
+        />
       </div>
 
       <div>
@@ -235,5 +238,54 @@ export default function ContactPage() {
         </div>
       </section>
     </>
+  )
+}
+
+function DarkSelect({ value, onChange, options, placeholder, required }) {
+  const [open, setOpen] = useState(false)
+  const wrapperRef = useRef(null)
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className={`
+          w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3
+          text-sm text-left outline-none flex items-center justify-between
+          focus:border-accent/50 focus:bg-black/60 transition-all duration-200
+          ${value ? 'text-light' : 'text-muted'}
+        `}
+      >
+        <span>{value || placeholder}</span>
+        <span className={`text-accent transition-transform ${open ? 'rotate-180' : ''}`}>▾</span>
+      </button>
+
+      {open && (
+        <div className="absolute z-20 w-full mt-2 rounded-xl border border-white/10 bg-surface shadow-2xl shadow-black/40 overflow-hidden max-h-64 overflow-y-auto">
+          {options.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => { onChange(opt); setOpen(false) }}
+              className="w-full px-4 py-3 text-sm text-light text-left hover:bg-accent/10 hover:text-accent transition-colors"
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {required && <input type="hidden" value={value || ''} required />}
+    </div>
   )
 }

@@ -43,11 +43,13 @@ export function Modal({ open, onClose, title, subtitle, children, size = 'md' })
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className={`
-              fixed z-50 inset-x-4 top-1/2 -translate-y-1/2
-              ${sizes[size]} mx-auto
-              bg-surface border border-white/10 rounded-2xl shadow-2xl overflow-hidden
+          className={`
+              fixed z-50 inset-x-4 inset-y-4 sm:inset-y-8 md:inset-y-12
+              ${sizes[size]} mx-auto my-auto
+              bg-surface border border-white/10 rounded-2xl shadow-2xl
+              flex flex-col overflow-hidden
             `}
+            style={{ maxHeight: 'calc(100vh - 2rem)' }}
           >
             {/* Header */}
             <div className="flex items-start justify-between px-6 py-5 border-b border-white/5">
@@ -69,7 +71,7 @@ export function Modal({ open, onClose, title, subtitle, children, size = 'md' })
             </div>
 
             {/* Content */}
-            <div className="overflow-y-auto admin-scroll max-h-[70vh]">
+            <div className="overflow-y-auto admin-scroll flex-1 min-h-0">
               {children}
             </div>
           </motion.div>
@@ -196,7 +198,9 @@ export function Field({ label, required, children, hint }) {
 
 /* Shared input class */
 export const inputCls = `
-  w-full bg-white/3 border border-white/10 rounded-xl px-4 py-2.5
+  w-full bg-black/40 border border-white/10 rounded-xl px-4 py-2.5
   text-sm text-light placeholder:text-muted outline-none
-  focus:border-accent/50 focus:bg-white/5 transition-all duration-200
+  focus:border-accent/50 focus:bg-black/60 transition-all duration-200
+  [color-scheme:dark]
+  [&>option]:bg-surface [&>option]:text-light
 `
